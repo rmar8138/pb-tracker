@@ -29,7 +29,7 @@ class PBForm extends Component {
     });
   };
 
-  onDateChange = date => this.setState({ date });
+  onDateChange = date => this.setState({ date: moment(date).startOf("day") });
 
   onFocusChange = ({ focused }) => this.setState({ focused });
 

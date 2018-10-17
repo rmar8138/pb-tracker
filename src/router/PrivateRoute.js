@@ -1,10 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import Nav from "../components/Nav";
 
+const Layout = styled.div`
+  display: flex;
+`;
+
 export const PrivateRoute = ({ uid, component: Component, ...rest }) => (
-  <div>
+  <Layout>
     <Nav />
     <Route
       {...rest}
@@ -12,7 +17,7 @@ export const PrivateRoute = ({ uid, component: Component, ...rest }) => (
         uid ? <Component {...props} /> : <Redirect to="/" />
       }
     />
-  </div>
+  </Layout>
 );
 
 const mapStateToProps = state => ({
