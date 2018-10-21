@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import shortid from "shortid";
 import { logoutAsync } from "../actions/authActions";
-import Container from "./Container";
 import { LogoutButton } from "./Buttons";
 
 const Navbar = styled.div`
@@ -27,6 +25,10 @@ const NavbarList = styled.ul`
 
   * {
     margin-bottom: 4rem;
+  }
+
+  > .active {
+    color: #95afc0;
   }
 `;
 
@@ -53,6 +55,10 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const activeStyle = {
+  color: "#95afc0"
+};
+
 class Nav extends Component {
   render() {
     return (
@@ -61,36 +67,24 @@ class Nav extends Component {
           <h1>PB Tracker</h1>
         </Header>
         <NavbarList>
-          <StyledNavLink
-            to="/dashboard"
-            activeStyle={{ color: "#95afc0" }}
-            exact
-          >
+          <StyledNavLink to="/dashboard" activeStyle={activeStyle} exact>
             Dashboard
           </StyledNavLink>
-          <StyledNavLink to="/addlift" activeStyle={{ color: "#95afc0" }} exact>
+          <StyledNavLink to="/addlift" activeStyle={activeStyle} exact>
             Add Lift
           </StyledNavLink>
-          <StyledNavLink to="/addpb" activeStyle={{ color: "#95afc0" }} exact>
+          <StyledNavLink to="/addpb" activeStyle={activeStyle} exact>
             Add PB
           </StyledNavLink>
-          <StyledNavLink
-            to="/editlifts"
-            activeStyle={{ color: "#95afc0" }}
-            exact
-          >
+          <StyledNavLink to="/editlifts" activeStyle={activeStyle} exact>
             Edit Lifts
           </StyledNavLink>
-          <StyledNavLink to="/editpbs" activeStyle={{ color: "#95afc0" }} exact>
+          <StyledNavLink to="/editpbs" activeStyle={activeStyle} exact>
             Edit PBs
           </StyledNavLink>
         </NavbarList>
         <SettingsList>
-          <StyledNavLink
-            to="/settings"
-            activeStyle={{ color: "#95afc0" }}
-            exact
-          >
+          <StyledNavLink to="/settings" activeStyle={activeStyle} exact>
             Settings
           </StyledNavLink>
           <LogoutButton onClick={this.props.logout}>Log Out</LogoutButton>

@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { SingleDatePicker } from "react-dates";
+import DatePicker from "react-datepicker";
 import moment from "moment";
 
 class PBForm extends Component {
   state = {
     label: this.props.lifts ? this.props.lifts[0].label : "",
-    date: this.props.pb ? this.props.pb.x : moment().startOf("day"),
+    date: this.props.pb ? moment(this.props.pb.x) : moment(),
     weight: this.props.pb ? this.props.pb.y : 0,
     note: this.props.pb ? this.props.pb.note : "",
     liftID: this.props.lifts[0].liftID,
-    focused: null,
     error: ""
   };
 
@@ -29,7 +28,7 @@ class PBForm extends Component {
     });
   };
 
-  onDateChange = date => this.setState({ date: moment(date).startOf("day") });
+  onDateChange = date => this.setState({ date });
 
   onFocusChange = ({ focused }) => this.setState({ focused });
 
@@ -46,7 +45,9 @@ class PBForm extends Component {
       if (this.state.date && this.state.weight) {
         // submit only if date and weight are valid
         this.props.addPb(this.state.liftID, {
-          x: moment(this.state.date).valueOf(),
+          x: moment(this.state.date)
+            .startOf("day")
+            .valueOf(),
           y: this.state.weight,
           note: this.state.note
         });
@@ -80,18 +81,12 @@ class PBForm extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <label>Date: </label>
-          <SingleDatePicker
-            date={moment(this.state.date)}
-            onDateChange={this.onDateChange}
-            focused={this.state.focused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
+          <label>Date: (MM/DD/YYYY)</label>
+          <DatePicker selected={this.state.date} onChange={this.onDateChange} />
           {this.props.type === "add" && (
             <div>
               <br />
+              <label>Lift name: </label>
               <select onChange={this.onNameChange} name="name" id="name">
                 {this.props.lifts.map(lift => {
                   return (

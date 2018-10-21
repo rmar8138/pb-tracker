@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PBForm from "./PBForm";
 import { addPbAsync } from "../actions/pbsActions";
+import { Header, Container } from "../styles/utilities";
 
 class AddPBPage extends Component {
   addPb = (liftID, pb) => {
@@ -11,13 +13,16 @@ class AddPBPage extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <Header>
+          <h1>Add PB</h1>
+        </Header>
         {this.props.lifts.length ? (
           <PBForm type="add" lifts={this.props.lifts} addPb={this.addPb} />
         ) : (
           <p>You haven't added any lifts! Go to the add lifts page first</p>
         )}
-      </div>
+      </Container>
     );
   }
 }
@@ -30,7 +35,9 @@ const mapDispatchToProps = dispatch => ({
   addPbAsync: (liftID, pb) => dispatch(addPbAsync(liftID, pb))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddPBPage);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddPBPage)
+);

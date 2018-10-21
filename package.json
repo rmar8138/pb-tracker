@@ -12,6 +12,7 @@
     "react": "^16.5.2",
     "react-chartjs-2": "^2.7.4",
     "react-color": "^2.14.1",
+    "react-datepicker": "^1.7.0",
     "react-dates": "^18.0.4",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",

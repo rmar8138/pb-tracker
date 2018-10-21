@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import shortid from "shortid";
 import LiftsForm from "./LiftForm";
 import { editLiftAsync, deleteLiftAsync } from "../actions/liftsActions";
 import { deleteLiftPbsAsync } from "../actions/pbsActions";
+import { Header, Container } from "../styles/utilities";
 
 class EditLiftsPage extends Component {
   render() {
     return (
-      <div>
+      <Container>
+        <Header>
+          <h1>Edit Lifts</h1>
+        </Header>
         {this.props.lifts.length ? (
           this.props.lifts.map(lift => {
             return (
@@ -25,7 +30,7 @@ class EditLiftsPage extends Component {
         ) : (
           <p>Do you even lift? There are no lifts to edit...</p>
         )}
-      </div>
+      </Container>
     );
   }
 }
@@ -40,7 +45,9 @@ const mapDispatchToProps = dispatch => ({
   deleteLiftPbsAsync: liftID => dispatch(deleteLiftPbsAsync(liftID))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditLiftsPage);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(EditLiftsPage)
+);

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import shortid from "shortid";
 import PBForm from "./PBForm";
 import { editPbAsync, deletePbAsync } from "../actions/pbsActions";
+import { Header, Container } from "../styles/utilities";
 
 class EditPBsPage extends Component {
   editPb = (liftID, pbID, updates) => {
@@ -17,7 +19,10 @@ class EditPBsPage extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <Header>
+          <h1>Edit PB's</h1>
+        </Header>
         {this.props.pbs.length ? (
           this.props.lifts.map(lift => (
             <div key={shortid.generate()}>
@@ -40,7 +45,7 @@ class EditPBsPage extends Component {
         ) : (
           <p>There are no PB's to edit</p>
         )}
-      </div>
+      </Container>
     );
   }
 }
@@ -56,7 +61,9 @@ const mapDispatchToProps = dispatch => ({
   deletePbAsync: (liftID, pbID) => dispatch(deletePbAsync(liftID, pbID))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditPBsPage);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(EditPBsPage)
+);

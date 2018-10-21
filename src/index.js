@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 import AppRouter, { history } from "./router/AppRouter";
 import * as serviceWorker from "./serviceWorker";
 import { firebase } from "./firebase/firebase";
