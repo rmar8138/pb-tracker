@@ -12,6 +12,7 @@ import configureStore from "./store/configureStore";
 import { login, logout } from "./actions/authActions";
 import { fetchLiftsAsync } from "./actions/liftsActions";
 import { fetchPbsAsync } from "./actions/pbsActions";
+import { getScaleAsync } from "./actions/settingsActions";
 
 const store = configureStore();
 
@@ -34,10 +35,9 @@ ReactDOM.render(<p>Loading</p>, document.getElementById("root"));
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    console.log("uid", user.uid);
-
     store.dispatch(login(user.uid));
     store.dispatch(fetchLiftsAsync(user.uid));
+    store.dispatch(getScaleAsync());
     store.dispatch(fetchPbsAsync(user.uid)).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
@@ -48,7 +48,6 @@ firebase.auth().onAuthStateChanged(user => {
   } else {
     store.dispatch(logout());
     renderApp();
-    console.log("log out");
     history.push("/");
   }
 });

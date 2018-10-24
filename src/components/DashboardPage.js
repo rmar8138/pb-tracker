@@ -10,6 +10,8 @@ const ChartContainer = styled.div`
   flex: 1;
   margin: 0 auto;
   padding: 2rem;
+  height: 100vh;
+  overflow: scroll;
 `;
 
 class DashboardPage extends Component {

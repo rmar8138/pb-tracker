@@ -7,7 +7,9 @@ const Chart = props => (
       data={{
         datasets: props.lifts.map(lift => ({
           ...lift,
-          data: props.pbs.filter(pb => lift.liftID === pb.liftID)
+          data: props.pbs.filter(pb => lift.liftID === pb.liftID),
+          lineTension: 0,
+          backgroundColor: "transparent"
         }))
       }}
       options={{

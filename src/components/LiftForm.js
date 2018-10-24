@@ -27,8 +27,7 @@ class LiftsForm extends Component {
       if (this.props.type === "add") {
         this.props.addLift({
           label: this.state.label,
-          borderColor: this.state.borderColor,
-          backgroundColor: "transparent"
+          borderColor: this.state.borderColor
         });
         this.setState({
           label: "",
