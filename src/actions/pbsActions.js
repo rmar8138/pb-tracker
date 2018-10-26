@@ -8,7 +8,7 @@ export const fetchPbs = pbs => ({
 });
 
 export const fetchPbsAsync = uid => {
-  return dispatch => {
+  return (dispatch, getState) => {
     const pbs = [];
     return database
       .ref(`users/${uid}/pbs`)
@@ -22,6 +22,12 @@ export const fetchPbsAsync = uid => {
             });
           });
         });
+        if (getState().settings.scale === "lb") {
+          console.log("lb");
+          pbs.forEach(pb => {
+            pb.y = +(pb.y * 2.205).toFixed(2);
+          });
+        }
       })
       .then(() => dispatch(fetchPbs(pbs)));
   };
@@ -40,7 +46,9 @@ export const addPbAsync = (liftID, pb) => {
     database
       .ref(`users/${uid}/pbs/${liftID}`)
       .push({
-        ...pb
+        ...pb,
+        y:
+          getState().settings.scale === "lb" ? +(pb.y / 2.205).toFixed(2) : pb.y
       })
       .then(ref => {
         dispatch(
@@ -106,3 +114,10 @@ export const deleteLiftPbsAsync = liftID => {
       .then(() => dispatch(deleteLiftPbs(liftID)));
   };
 };
+
+// CONVERT_PBS
+
+export const convertPbs = scale => ({
+  type: "CONVERT_PBS",
+  scale
+});

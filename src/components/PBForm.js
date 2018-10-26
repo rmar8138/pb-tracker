@@ -99,7 +99,10 @@ class PBForm extends Component {
             </div>
           )}
           <br />
-          <label>Weight: </label>
+          <label>
+            Weight ({this.props.scale}
+            ):{" "}
+          </label>
           <input
             name="weight"
             onChange={this.onWeightChange}

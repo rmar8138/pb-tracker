@@ -28,7 +28,7 @@ export const getScaleAsync = () => {
 export const changeScaleAsync = () => {
   return (dispatch, getState) => {
     let scale = "";
-    database
+    return database
       .ref(`users/${getState().auth.uid}/settings/scale`)
       .once("value", snapshot => {
         if (snapshot.val() === "kg") {

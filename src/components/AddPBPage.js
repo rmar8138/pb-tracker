@@ -18,7 +18,12 @@ class AddPBPage extends Component {
           <h1>Add PB</h1>
         </Header>
         {this.props.lifts.length ? (
-          <PBForm type="add" lifts={this.props.lifts} addPb={this.addPb} />
+          <PBForm
+            type="add"
+            lifts={this.props.lifts}
+            addPb={this.addPb}
+            scale={this.props.scale}
+          />
         ) : (
           <p>You haven't added any lifts! Go to the add lifts page first</p>
         )}
@@ -28,7 +33,8 @@ class AddPBPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  lifts: state.lifts
+  lifts: state.lifts,
+  scale: state.settings.scale
 });
 
 const mapDispatchToProps = dispatch => ({

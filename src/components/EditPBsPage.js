@@ -37,6 +37,7 @@ class EditPBsPage extends Component {
                       deletePb={this.deletePb}
                       pb={pb}
                       lifts={this.props.lifts}
+                      scale={this.props.scale}
                     />
                   )
               )}
@@ -52,7 +53,8 @@ class EditPBsPage extends Component {
 
 const mapStateToProps = state => ({
   lifts: state.lifts,
-  pbs: state.pbs
+  pbs: state.pbs,
+  scale: state.settings.scale
 });
 
 const mapDispatchToProps = dispatch => ({
