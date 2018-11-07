@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import shortid from "shortid";
 
@@ -9,19 +10,26 @@ const LiftsSummary = props => {
         const pbArray = props.pbs.filter(pb => pb.liftID === lift.liftID);
         return (
           <div key={shortid.generate()}>
-            <h2>{lift.label}</h2>
+            <h2>
+              {lift.label}
+              <Link to={`/editlift/${lift.liftID}`}>Edit</Link>
+            </h2>
             {pbArray.length ? (
               pbArray.map(pb => {
                 return (
                   <div key={shortid.generate()}>
                     <h3>{moment(pb.x).format("MMMM Do YYYY")}</h3>
-                    <p>Weight: {pb.y}</p>
+                    <p>
+                      Weight: {pb.y}
+                      {props.scale}
+                    </p>
                     {pb.note && <p>{pb.note}</p>}
+                    <Link to={`/editpb/${pb.pbID}`}>Edit</Link>
                   </div>
                 );
               })
             ) : (
-              <p>No pbs logged</p>
+              <p>No pbs logged.</p>
             )}
           </div>
         );

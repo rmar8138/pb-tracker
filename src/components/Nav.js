@@ -76,12 +76,6 @@ class Nav extends Component {
           <StyledNavLink to="/addpb" activeStyle={activeStyle} exact>
             Add PB
           </StyledNavLink>
-          <StyledNavLink to="/editlifts" activeStyle={activeStyle} exact>
-            Edit Lifts
-          </StyledNavLink>
-          <StyledNavLink to="/editpbs" activeStyle={activeStyle} exact>
-            Edit PBs
-          </StyledNavLink>
         </NavbarList>
         <SettingsList>
           <StyledNavLink to="/settings" activeStyle={activeStyle} exact>

@@ -6,8 +6,8 @@ import LoginPage from "../components/LoginPage";
 import DashboardPage from "../components/DashboardPage";
 import AddLiftPage from "../components/AddLiftPage";
 import AddPBPage from "../components/AddPBPage";
-import EditLiftsPage from "../components/EditLiftsPage";
-import EditPBsPage from "../components/EditPBsPage";
+import EditLiftPage from "../components/EditLiftPage";
+import EditPBPage from "../components/EditPBPage";
 import SettingsPage from "../components/SettingsPage";
 import NotFoundPage from "../components/NotFoundPage";
 
@@ -21,8 +21,8 @@ export default () => (
         <PrivateRoute path="/dashboard" component={DashboardPage} exact />
         <PrivateRoute path="/addlift" component={AddLiftPage} exact />
         <PrivateRoute path="/addpb" component={AddPBPage} exact />
-        <PrivateRoute path="/editlifts" component={EditLiftsPage} exact />
-        <PrivateRoute path="/editpbs" component={EditPBsPage} exact />
+        <PrivateRoute path="/editpb/:id" component={EditPBPage} />
+        <PrivateRoute path="/editlift/:id" component={EditLiftPage} />
         <PrivateRoute path="/settings" component={SettingsPage} exact />
         <Route component={NotFoundPage} />
       </Switch>

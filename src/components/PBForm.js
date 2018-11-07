@@ -4,11 +4,14 @@ import moment from "moment";
 
 class PBForm extends Component {
   state = {
-    label: this.props.lifts ? this.props.lifts[0].label : "",
+    label: this.props.lift ? this.props.lift.label : "",
     date: this.props.pb ? moment(this.props.pb.x) : moment(),
     weight: this.props.pb ? this.props.pb.y : 0,
     note: this.props.pb ? this.props.pb.note : "",
-    liftID: this.props.lifts[0].liftID,
+    liftID:
+      this.props.type === "edit"
+        ? this.props.pb.liftID
+        : this.props.lifts[0].liftID,
     error: ""
   };
 
@@ -81,6 +84,12 @@ class PBForm extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
+          {this.props.type === "edit" && (
+            <div>
+              <h2>{this.props.lift.label}</h2>
+              <br />
+            </div>
+          )}
           <label>Date: (MM/DD/YYYY)</label>
           <DatePicker selected={this.state.date} onChange={this.onDateChange} />
           {this.props.type === "add" && (

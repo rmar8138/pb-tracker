@@ -8,7 +8,7 @@ import { Header, Container } from "../styles/utilities";
 class AddPBPage extends Component {
   addPb = (liftID, pb) => {
     this.props.addPbAsync(liftID, pb);
-    // push to dashboard
+    this.props.history.push("/dashboard");
   };
 
   render() {

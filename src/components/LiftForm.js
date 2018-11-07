@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CirclePicker } from "react-color";
 
-class LiftsForm extends Component {
+class LiftForm extends Component {
   state = {
     label: this.props.lift ? this.props.lift.label : "",
     borderColor: this.props.lift ? this.props.lift.borderColor : "",
@@ -84,4 +84,4 @@ class LiftsForm extends Component {
   }
 }
 
-export default LiftsForm;
+export default LiftForm;

@@ -21,8 +21,16 @@ class DashboardPage extends Component {
         <Header>
           <h1>Dashboard</h1>
         </Header>
-        <Chart lifts={this.props.lifts} pbs={this.props.pbs} />
-        <LiftsSummary lifts={this.props.lifts} pbs={this.props.pbs} />
+        <Chart
+          lifts={this.props.lifts}
+          pbs={this.props.pbs}
+          scale={this.props.scale}
+        />
+        <LiftsSummary
+          lifts={this.props.lifts}
+          pbs={this.props.pbs}
+          scale={this.props.scale}
+        />
       </ChartContainer>
     );
   }
@@ -30,7 +38,8 @@ class DashboardPage extends Component {
 
 const mapStateToProps = state => ({
   lifts: state.lifts,
-  pbs: state.pbs
+  pbs: state.pbs,
+  scale: state.settings.scale
 });
 
 export default withRouter(connect(mapStateToProps)(DashboardPage));

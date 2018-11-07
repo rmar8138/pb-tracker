@@ -25,13 +25,21 @@ const Chart = props => (
           yAxes: [
             {
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                callback: label => label + props.scale
               }
             }
           ]
         },
         tooltips: {
-          callbacks: {}
+          callbacks: {
+            label: (tooltipItem, data) =>
+              `${data.datasets[tooltipItem.datasetIndex].label}: ${
+                tooltipItem.yLabel
+              }${props.scale}`
+          },
+          xPadding: 10,
+          yPadding: 10
         }
       }}
     />
