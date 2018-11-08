@@ -4,7 +4,6 @@ import moment from "moment";
 
 class PBForm extends Component {
   state = {
-    label: this.props.lift ? this.props.lift.label : "",
     date: this.props.pb ? moment(this.props.pb.x) : moment(),
     weight: this.props.pb ? this.props.pb.y : 0,
     note: this.props.pb ? this.props.pb.note : "",
@@ -17,11 +16,8 @@ class PBForm extends Component {
 
   onNameChange = e => {
     const { value } = e.target;
-    const lift = this.props.lifts.filter(lift => lift.label === value);
-    this.setState({
-      name: value,
-      liftID: lift[0].liftID
-    });
+    const lift = this.props.lifts.find(lift => lift.label === value);
+    this.setState({ liftID: lift.liftID });
   };
 
   onWeightChange = e => {
@@ -96,14 +92,12 @@ class PBForm extends Component {
             <div>
               <br />
               <label>Lift name: </label>
-              <select onChange={this.onNameChange} name="name" id="name">
-                {this.props.lifts.map(lift => {
-                  return (
-                    <option name="option" key={lift.label} value={lift.label}>
-                      {lift.label}
-                    </option>
-                  );
-                })}
+              <select onChange={this.onNameChange}>
+                {this.props.lifts.map(lift => (
+                  <option key={lift.label} value={lift.label}>
+                    {lift.label}
+                  </option>
+                ))}
               </select>
             </div>
           )}

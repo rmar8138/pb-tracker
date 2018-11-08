@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Switch from "react-switch";
 import { convertPbs } from "../actions/pbsActions";
 import { changeScaleAsync } from "../actions/settingsActions";
+import { Header, Container } from "../styles/utilities";
 
 class SettingsPage extends Component {
   state = {
@@ -26,7 +27,10 @@ class SettingsPage extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <Header>
+          <h1>Settings</h1>
+        </Header>
         <label htmlFor="scale-switch">
           <span>Scale:</span>
           <Switch
@@ -66,7 +70,7 @@ class SettingsPage extends Component {
             id="scale-switch"
           />
         </label>
-      </div>
+      </Container>
     );
   }
 }

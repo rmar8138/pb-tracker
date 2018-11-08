@@ -15,6 +15,16 @@ const ChartContainer = styled.div`
 `;
 
 class DashboardPage extends Component {
+  state = {
+    selectedLiftID: this.props.lifts[0].liftID
+  };
+
+  onSelectedLiftChange = e => {
+    const { value } = e.target;
+    const lift = this.props.lifts.find(lift => lift.liftID === value);
+    this.setState({ selectedLiftID: lift.liftID });
+  };
+
   render() {
     return (
       <ChartContainer>
@@ -26,10 +36,24 @@ class DashboardPage extends Component {
           pbs={this.props.pbs}
           scale={this.props.scale}
         />
+        <div>
+          <label>Selected lift: </label>
+          <select onChange={this.onSelectedLiftChange}>
+            {this.props.lifts.map(lift => (
+              <option key={lift.label} value={lift.liftID}>
+                {lift.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <LiftsSummary
-          lifts={this.props.lifts}
-          pbs={this.props.pbs}
           scale={this.props.scale}
+          lift={this.props.lifts.find(
+            lift => lift.liftID === this.state.selectedLiftID
+          )}
+          pbs={this.props.pbs.filter(
+            pb => pb.liftID === this.state.selectedLiftID
+          )}
         />
       </ChartContainer>
     );
