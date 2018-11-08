@@ -6,14 +6,21 @@ import { changeScaleAsync } from "../actions/settingsActions";
 
 class SettingsPage extends Component {
   state = {
-    checked: this.props.scale === "kg"
+    checked: this.props.scale === "kg",
+    disabled: false
   };
 
   handleChange = checked => {
-    this.setState({ checked }, () => {
-      this.props.changeScaleAsync().then(() => {
-        this.props.convertPbs(this.props.scale);
-      });
+    this.setState({ checked, disabled: true }, () => {
+      this.props
+        .changeScaleAsync()
+        .then(() => {
+          console.log(this.props.scale);
+          this.props.convertPbs(this.props.scale);
+        })
+        .then(() => {
+          this.setState({ disabled: false });
+        });
     });
   };
 
@@ -25,6 +32,7 @@ class SettingsPage extends Component {
           <Switch
             onChange={this.handleChange}
             checked={this.state.checked}
+            disabled={this.state.disabled}
             checkedIcon={
               <div
                 style={{
