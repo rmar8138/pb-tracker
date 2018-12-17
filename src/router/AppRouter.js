@@ -1,15 +1,15 @@
-import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
-import createHistory from "history/createBrowserHistory";
-import PrivateRoute from "./PrivateRoute";
-import LoginPage from "../components/LoginPage";
-import DashboardPage from "../components/DashboardPage";
-import AddLiftPage from "../components/AddLiftPage";
-import AddPBPage from "../components/AddPBPage";
-import EditLiftPage from "../components/EditLiftPage";
-import EditPBPage from "../components/EditPBPage";
-import SettingsPage from "../components/SettingsPage";
-import NotFoundPage from "../components/NotFoundPage";
+import React from 'react';
+import { Router, Switch, Route } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+import PrivateRoute from './PrivateRoute';
+import LoginPage from '../components/LoginPage';
+import DashboardPage from '../components/DashboardPage';
+import AddLiftPage from '../components/AddLiftPage';
+import AddPBPage from '../components/AddPBPage';
+import EditLiftPage from '../components/EditLiftPage';
+import EditPBPage from '../components/EditPBPage';
+import SettingsPage from '../components/SettingsPage';
+import NotFoundPage from '../components/NotFoundPage';
 
 export const history = createHistory();
 

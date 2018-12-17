@@ -1,24 +1,29 @@
-import React from "react";
-import { Line } from "react-chartjs-2";
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import styled from 'styled-components';
+
+const ChartContainer = styled.div`
+  margin-bottom: 2rem;
+`;
 
 const Chart = props => (
-  <div>
+  <ChartContainer>
     <Line
       data={{
         datasets: props.lifts.map(lift => ({
           ...lift,
           data: props.pbs.filter(pb => lift.liftID === pb.liftID),
           lineTension: 0,
-          backgroundColor: "transparent"
+          backgroundColor: 'transparent'
         }))
       }}
       options={{
         scales: {
           xAxes: [
             {
-              type: "time",
+              type: 'time',
               time: {
-                unit: "month"
+                unit: 'month'
               }
             }
           ],
@@ -43,7 +48,7 @@ const Chart = props => (
         }
       }}
     />
-  </div>
+  </ChartContainer>
 );
 
 export default Chart;

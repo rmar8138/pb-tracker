@@ -1,11 +1,11 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import Nav from "../components/Nav";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import Nav from '../components/Nav';
 
 const Layout = styled.div`
-  display: flex;
+  /* display: flex; */
 `;
 
 export const PrivateRoute = ({ uid, component: Component, ...rest }) => (
