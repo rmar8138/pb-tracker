@@ -1,17 +1,28 @@
-import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import moment from "moment";
+import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import {
+  Form,
+  FormGroup,
+  Input,
+  FormText,
+  Label,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Button
+} from 'reactstrap';
 
 class PBForm extends Component {
   state = {
     date: this.props.pb ? moment(this.props.pb.x) : moment(),
     weight: this.props.pb ? this.props.pb.y : 0,
-    note: this.props.pb ? this.props.pb.note : "",
+    note: this.props.pb ? this.props.pb.note : '',
     liftID:
-      this.props.type === "edit"
+      this.props.type === 'edit'
         ? this.props.pb.liftID
         : this.props.lifts[0].liftID,
-    error: ""
+    error: ''
   };
 
   onNameChange = e => {
@@ -40,29 +51,29 @@ class PBForm extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if (this.props.type === "add") {
+    if (this.props.type === 'add') {
       if (this.state.date && this.state.weight) {
         // submit only if date and weight are valid
         this.props.addPb(this.state.liftID, {
           x: moment(this.state.date)
-            .startOf("day")
+            .startOf('day')
             .valueOf(),
           y: this.state.weight,
           note: this.state.note
         });
         this.setState({
           weight: 0,
-          note: "",
+          note: '',
           focused: null,
-          error: ""
+          error: ''
         });
       } else {
         // else display error
         this.setState({
-          error: "Please enter a valid date and weight"
+          error: 'Please enter a valid date and weight'
         });
       }
-    } else if (this.props.type === "edit") {
+    } else if (this.props.type === 'edit') {
       this.props.editPb(this.props.pb.liftID, this.props.pb.pbID, {
         x: moment(this.state.date).valueOf(),
         y: this.state.weight,
@@ -79,58 +90,78 @@ class PBForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
-          {this.props.type === "edit" && (
+        <Form onSubmit={this.onSubmit}>
+          {this.props.type === 'edit' && (
             <div>
               <h2>{this.props.lift.label}</h2>
-              <br />
             </div>
           )}
-          <label>Date: (MM/DD/YYYY)</label>
-          <DatePicker selected={this.state.date} onChange={this.onDateChange} />
-          {this.props.type === "add" && (
-            <div>
-              <br />
-              <label>Lift name: </label>
-              <select onChange={this.onNameChange}>
+          <FormGroup>
+            <Label for="date">Date:</Label>
+            <DatePicker
+              id="date"
+              name="date"
+              selected={this.state.date}
+              onChange={this.onDateChange}
+            />
+            <FormText>Please enter in MM/DD/YYYY format</FormText>
+          </FormGroup>
+          {this.props.type === 'add' && (
+            <FormGroup>
+              <Label id="liftName">Lift name: </Label>
+              <Input
+                id="liftName"
+                name="liftName"
+                type="select"
+                onChange={this.onNameChange}
+              >
                 {this.props.lifts.map(lift => (
                   <option key={lift.label} value={lift.label}>
                     {lift.label}
                   </option>
                 ))}
-              </select>
-            </div>
+              </Input>
+            </FormGroup>
           )}
-          <br />
-          <label>
-            Weight ({this.props.scale}
-            ):{" "}
-          </label>
-          <input
-            name="weight"
-            onChange={this.onWeightChange}
-            type="number"
-            value={this.state.weight}
-            min={0}
-            step="0.01"
-          />
-          <br />
-          <br />
-          <label>Note: </label>
-          <textarea
-            onChange={this.onNoteChange}
-            name="note"
-            id="note"
-            value={this.state.note}
-          />
-          <br />
-          <br />
-          <button>Save</button>
-          {this.props.type === "edit" && (
-            <button onClick={this.handleDeletePB}>Delete</button>
+          <FormGroup>
+            <Label for="weight">Weight:</Label>
+            <InputGroup>
+              <Input
+                id="weight"
+                name="weight"
+                onChange={this.onWeightChange}
+                type="number"
+                value={this.state.weight}
+                min={0}
+                step="0.01"
+              />
+              <InputGroupAddon addonType="append">
+                <InputGroupText>{this.props.scale}</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label for="note">Note:</Label>
+            <Input
+              id="note"
+              type="textarea"
+              onChange={this.onNoteChange}
+              name="note"
+              value={this.state.note}
+            />
+          </FormGroup>
+          <Button color="success">Save</Button>
+          {this.props.type === 'edit' && (
+            <Button
+              color="danger"
+              onClick={this.handleDeletePB}
+              className="ml-2"
+            >
+              Delete
+            </Button>
           )}
           {this.state.error && this.state.error}
-        </form>
+        </Form>
       </div>
     );
   }

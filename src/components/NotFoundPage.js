@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
+import { Container } from 'reactstrap';
 
 export default () => {
   return (
-    <div>
-      <h1>The page you are looking for doesn't exist...</h1>
-    </div>
+    <Container>
+      <h1 className="display-2">404: Page not found</h1>
+      <p className="lead">The page you are looking for doesn't exist...</p>
+    </Container>
   );
 };

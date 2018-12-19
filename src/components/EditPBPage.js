@@ -1,36 +1,38 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PBForm from "./PBForm";
-import { editPbAsync, deletePbAsync } from "../actions/pbsActions";
-import { Header, Container } from "../styles/utilities";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Row, Col } from 'reactstrap';
+import PBForm from './PBForm';
+import { editPbAsync, deletePbAsync } from '../actions/pbsActions';
 
 class EditPBPage extends Component {
   editPb = (liftID, pbID, updates) => {
     this.props.editPbAsync(liftID, pbID, updates);
-    this.props.history.push("/dashboard");
+    this.props.history.push('/dashboard');
   };
 
   deletePb = (liftID, pbID) => {
     this.props.deletePbAsync(liftID, pbID);
-    this.props.history.push("/dashboard");
+    this.props.history.push('/dashboard');
   };
 
   render() {
     return (
       <Container>
-        <Header>
-          <h1>Edit PB</h1>
-        </Header>
-        <PBForm
-          pb={this.props.pb}
-          lift={this.props.lift.find(
-            lift => lift.liftID === this.props.pb.liftID
-          )}
-          scale={this.props.scale}
-          editPb={this.editPb}
-          deletePb={this.deletePb}
-          type="edit"
-        />
+        <h1 className="mt-2 text-center">Edit PB</h1>
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <PBForm
+              pb={this.props.pb}
+              lift={this.props.lift.find(
+                lift => lift.liftID === this.props.pb.liftID
+              )}
+              scale={this.props.scale}
+              editPb={this.editPb}
+              deletePb={this.deletePb}
+              type="edit"
+            />
+          </Col>
+        </Row>
       </Container>
     );
   }

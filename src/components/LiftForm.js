@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { CirclePicker } from "react-color";
+import React, { Component } from 'react';
+import { CirclePicker } from 'react-color';
+import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 
 class LiftForm extends Component {
   state = {
-    label: this.props.lift ? this.props.lift.label : "",
-    borderColor: this.props.lift ? this.props.lift.borderColor : "",
-    error: ""
+    label: this.props.lift ? this.props.lift.label : '',
+    borderColor: this.props.lift ? this.props.lift.borderColor : '',
+    error: ''
   };
 
   onNameChange = e => {
@@ -24,17 +25,17 @@ class LiftForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     if (this.state.label && this.state.borderColor) {
-      if (this.props.type === "add") {
+      if (this.props.type === 'add') {
         this.props.addLift({
           label: this.state.label,
           borderColor: this.state.borderColor
         });
         this.setState({
-          label: "",
-          borderColor: "",
-          error: ""
+          label: '',
+          borderColor: '',
+          error: ''
         });
-      } else if (this.props.type === "edit") {
+      } else if (this.props.type === 'edit') {
         this.props.editLift(this.props.lift.liftID, {
           label: this.state.label,
           borderColor: this.state.borderColor
@@ -42,7 +43,7 @@ class LiftForm extends Component {
       }
     } else {
       this.setState({
-        error: "Please enter a valid lift name and select a color"
+        error: 'Please enter a valid lift name and select a color'
       });
     }
   };
@@ -57,28 +58,40 @@ class LiftForm extends Component {
     return (
       <div>
         <h2>{this.props.lifts && this.props.lifts.label}</h2>
-        <form onSubmit={this.onSubmit}>
-          <label>Lift name:</label>
-          <input
-            onChange={this.onNameChange}
-            type="text"
-            value={this.state.label}
-          />
-          <br />
-          <br />
-          <label>Select a color:</label>
-          <CirclePicker
-            color={this.state.borderColor}
-            onChange={this.onColorChange}
-          />
-          <br />
-          <br />
-          <button>Save</button>
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <Label for="liftName">Lift name:</Label>
+            <Input
+              id="liftName"
+              name="liftName"
+              onChange={this.onNameChange}
+              type="text"
+              value={this.state.label}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <Label for="color">Select a color:</Label>
+            <CirclePicker
+              id="color"
+              name="color"
+              color={this.state.borderColor}
+              onChange={this.onColorChange}
+            />
+          </FormGroup>
+
+          <Button color="success">Save</Button>
           {this.props.lift && (
-            <button onClick={this.handleDeleteLift}>Delete</button>
+            <Button
+              color="danger"
+              onClick={this.handleDeleteLift}
+              className="ml-2"
+            >
+              Delete
+            </Button>
           )}
           {this.state.error && this.state.error}
-        </form>
+        </Form>
       </div>
     );
   }

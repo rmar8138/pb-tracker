@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
+import { Container, Col, Input, Label } from 'reactstrap';
 import Chart from './Chart';
 import LiftsSummary from './LiftsSummary';
-import { Header } from '../styles/utilities';
-
-const ChartContainer = styled.div`
-  flex: 1;
-  margin: 0 auto;
-  padding: 2rem;
-  height: 100vh;
-`;
 
 class DashboardPage extends Component {
   state = {
@@ -26,25 +18,23 @@ class DashboardPage extends Component {
 
   render() {
     return (
-      <ChartContainer>
-        <Header>
-          <h1>Dashboard</h1>
-        </Header>
+      <Container>
+        <h1 className="display-5 text-center mt-2">Dashboard</h1>
         <Chart
           lifts={this.props.lifts}
           pbs={this.props.pbs}
           scale={this.props.scale}
         />
-        <div>
-          <label>Selected lift: </label>
-          <select onChange={this.onSelectedLiftChange}>
+        <Col xs="12" md="4" className="mt-5">
+          <Label>Selected lift:</Label>
+          <Input type="select" onChange={this.onSelectedLiftChange}>
             {this.props.lifts.map(lift => (
               <option key={lift.label} value={lift.liftID}>
                 {lift.label}
               </option>
             ))}
-          </select>
-        </div>
+          </Input>
+        </Col>
         <LiftsSummary
           scale={this.props.scale}
           lift={this.props.lifts.find(
@@ -54,7 +44,7 @@ class DashboardPage extends Component {
             pb => pb.liftID === this.state.selectedLiftID
           )}
         />
-      </ChartContainer>
+      </Container>
     );
   }
 }

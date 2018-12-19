@@ -1,39 +1,41 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import LiftForm from "./LiftForm";
-import { editLiftAsync, deleteLiftAsync } from "../actions/liftsActions";
-import { deleteLiftPbsAsync } from "../actions/pbsActions";
-import { Header, Container } from "../styles/utilities";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Row, Col } from 'reactstrap';
+import LiftForm from './LiftForm';
+import { editLiftAsync, deleteLiftAsync } from '../actions/liftsActions';
+import { deleteLiftPbsAsync } from '../actions/pbsActions';
 
 class EditLiftPage extends Component {
   editLift = (liftID, updates) => {
     this.props.editLiftAsync(liftID, updates);
-    this.props.history.push("/dashboard");
+    this.props.history.push('/dashboard');
   };
 
   deleteLift = liftID => {
     this.props.deleteLiftAsync(liftID);
-    this.props.history.push("/dashboard");
+    this.props.history.push('/dashboard');
   };
 
   deleteLiftPbs = liftID => {
     this.props.deleteLiftPbsAsync(liftID);
-    this.props.history.push("/dashboard");
+    this.props.history.push('/dashboard');
   };
 
   render() {
     return (
       <Container>
-        <Header>
-          <h1>Edit Lift</h1>
-        </Header>
-        <LiftForm
-          lift={this.props.lift}
-          type="edit"
-          editLift={this.editLift}
-          deleteLift={this.deleteLift}
-          deleteLiftPbs={this.deleteLiftPbs}
-        />
+        <h1 className="mt-2 text-center">Edit Lift</h1>
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <LiftForm
+              lift={this.props.lift}
+              type="edit"
+              editLift={this.editLift}
+              deleteLift={this.deleteLift}
+              deleteLiftPbs={this.deleteLiftPbs}
+            />
+          </Col>
+        </Row>
       </Container>
     );
   }

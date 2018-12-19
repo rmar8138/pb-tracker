@@ -1,13 +1,9 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import styled from 'styled-components';
-
-const ChartContainer = styled.div`
-  margin-bottom: 2rem;
-`;
+import { Container } from 'reactstrap';
 
 const Chart = props => (
-  <ChartContainer>
+  <Container>
     <Line
       data={{
         datasets: props.lifts.map(lift => ({
@@ -48,7 +44,7 @@ const Chart = props => (
         }
       }}
     />
-  </ChartContainer>
+  </Container>
 );
 
 export default Chart;
